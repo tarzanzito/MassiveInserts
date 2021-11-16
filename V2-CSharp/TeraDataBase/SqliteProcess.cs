@@ -236,8 +236,8 @@ namespace ConsoleApp1
         private DateTime RandomDateTime()
         {
             int days = _random.Next(1, Constants.MaxDays);
-            DateTime newDate = DateTime.Now;
-            newDate.AddDays(System.Convert.ToDouble(days));
+            DateTime nowDate = DateTime.Now;
+            DateTime newDate = nowDate.AddDays(System.Convert.ToDouble(days));
 
             return newDate;
         }

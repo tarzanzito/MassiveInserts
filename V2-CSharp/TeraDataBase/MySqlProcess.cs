@@ -54,21 +54,21 @@ namespace ConsoleApp1
 
         private void CreateDatabase(string connString)
         {
-            string sql = @"CREATE DATABASE IF NOT EXISTS TeraBase";
+            //string sql = @"CREATE DATABASE IF NOT EXISTS TeraDataBase";
 
-            try
-            {
-                MySqlCommand comm = _conn.CreateCommand();
-                comm.CommandText = sql;
-                //comm.Parameters.Add("@person", "Myname");
-                //comm.Parameters.Add("@address", "Myaddress");
-                comm.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("ERROR CreateDatabase:" + ex.Message);
-                throw;
-            }
+            //try
+            //{
+            //    MySqlCommand comm = _conn.CreateCommand();
+            //    comm.CommandText = sql;
+            //    //comm.Parameters.Add("@person", "Myname");
+            //    //comm.Parameters.Add("@address", "Myaddress");
+            //    comm.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("ERROR CreateDatabase:" + ex.Message);
+            //    throw;
+            //}
         }
 
         private void CreateTableProducts()
@@ -136,7 +136,7 @@ namespace ConsoleApp1
 
         private void InsertProduct(string guid, string name, int price, string validation, int categoryId)
         {
-            string sql = "INSERT INTO products VALUES (NULL, '" + guid + "', '" + name + "', " + price.ToString() + ", '" + validation + "', " + categoryId.ToString() + ")";
+            string sql = "INSERT INTO Products VALUES (NULL, '" + guid + "', '" + name + "', " + price.ToString() + ", '" + validation + "', " + categoryId.ToString() + ")";
 
             try
             {
@@ -238,8 +238,8 @@ namespace ConsoleApp1
         private DateTime RandomDateTime()
         {
             int days = _random.Next(1, Constants.MaxDays);
-            DateTime newDate = DateTime.Now;
-            newDate.AddDays(System.Convert.ToDouble(days));
+            DateTime nowDate = DateTime.Now;
+            DateTime newDate = nowDate.AddDays(System.Convert.ToDouble(days));
 
             return newDate;
         }

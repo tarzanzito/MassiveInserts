@@ -18,8 +18,6 @@ namespace ConsoleApp1
         {
             try
             {
-                string ini = DateTime.Now.ToString();
-
                 if (reset)
                     CreateDatabase(connString);
 
@@ -31,15 +29,11 @@ namespace ConsoleApp1
                     CreateTableProducts();
                     CreateTableCategories();
                     CreateTableCategoryGroups();
+                    // InsertMultiCategory(); //import categories.sql
+                    InsertMultiCategoryGroup();
                 }
 
                 InsertMultiProduct(newProductRows);
-
-                if (reset)
-                {
-                    InsertMultiCategory();
-                    InsertMultiCategoryGroup();
-                }
 
                 _conn.Close();
             }
@@ -191,7 +185,7 @@ namespace ConsoleApp1
                 string name = RandomString();
                 int price = _random.Next(1, Constants.MaxPrice);
                 string validation = RandomDateTime().ToString("yyyy/MM/dd");
-                int categoryId = _random.Next(1, Constants.MaxCategory);
+                int categoryId = _random.Next(1, Constants.MaxCategory + 1);
 
                 InsertProduct(guid, name, price, validation, categoryId);
 
@@ -204,7 +198,7 @@ namespace ConsoleApp1
             for (int x = 1; x <= Constants.MaxCategory; x++)
             {
                 string name = "Category - " + x.ToString("0000");
-                int categoryGroupId = _random.Next(1, Constants.MaxCategoryGroup);
+                int categoryGroupId = _random.Next(1, Constants.MaxCategoryGroup + 1);
 
                 InsertCategory(name, categoryGroupId);
             }

@@ -19,29 +19,22 @@ namespace ConsoleApp1
         {
             try
             {
-                string ini = DateTime.Now.ToString();
-
                 _conn = new MySqlConnection(connString);
                 _conn.Open();
 
                 if (reset)
                     CreateDatabase(connString);
 
-
                 if (reset)
                 {
                     CreateTableProducts();
                     CreateTableCategories();
                     CreateTableCategoryGroups();
+                    //InsertMultiCategory(); //import categories.sql
+                    InsertMultiCategoryGroup();
                 }
 
                 InsertMultiProduct(newProductRows);
-
-                if (reset)
-                {
-                    InsertMultiCategory();
-                    InsertMultiCategoryGroup();
-                }
 
                 _conn.Close();
             }
@@ -152,7 +145,27 @@ namespace ConsoleApp1
                 throw;
             }
         }
+        //private void UpdateProduct(int id, string guid, string name, int price, string validation, int categoryId)
+        private void UpdateProduct(int id, int categoryId)
+        {
+            string sql = "UPDATE Products SET categoryId = @CategoryId WHERE Id = @Id";
 
+            try
+            {
+                MySqlCommand comm = _conn.CreateCommand();
+                comm.Parameters.AddWithValue("@CategoryId", categoryId);
+                comm.Parameters.AddWithValue("@Id", id);
+                comm.CommandText = sql;
+                comm.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR UpdateProduct:" + ex.Message);
+                Console.ReadKey();
+
+                throw;
+            }
+        }
         private void InsertCategory(string name, int categoryGroupId)
         {
             string sql = "INSERT INTO Categories VALUES (NULL, '" + name + "', " + categoryGroupId.ToString() + ")";
@@ -194,7 +207,7 @@ namespace ConsoleApp1
                 string name = RandomString();
                 int price = _random.Next(1, Constants.MaxPrice);
                 string validation = RandomDateTime().ToString("yyyy/MM/dd");
-                int categoryId = _random.Next(1, Constants.MaxCategory);
+                int categoryId = _random.Next(1, Constants.MaxCategory + 1);
 
                 InsertProduct(guid, name, price, validation, categoryId);
 
@@ -207,7 +220,7 @@ namespace ConsoleApp1
             for (int x = 1; x <= Constants.MaxCategory; x++)
             {
                 string name = "Category - " + x.ToString("0000");
-                int categoryGroupId = _random.Next(1, Constants.MaxCategoryGroup);
+                int categoryGroupId = _random.Next(1, Constants.MaxCategoryGroup + 1);
 
                 InsertCategory(name, categoryGroupId);
             }

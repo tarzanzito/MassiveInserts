@@ -1,0 +1,8 @@
+Confirm "Categories" 
+
+select count(*) FROM (SELECT CategoryGroupId, count(*) as total
+  FROM Categories
+  group by CategoryGroupId
+order by total)
+
+result = 500

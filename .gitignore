@@ -130,3 +130,5 @@ dmypy.json
 /V2/obj
 /V2/bin
 /V2/.vs
+/V2/TeraDataBase/obj/Debug/net5.0
+/V2/TeraDataBase/obj

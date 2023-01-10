@@ -1,0 +1,6 @@
+Id; --integer
+Guid; --text
+Name; --text
+Price; -- integer
+Validation; -- text
+CategoryId -- integer

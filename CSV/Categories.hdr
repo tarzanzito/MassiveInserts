@@ -1,0 +1,3 @@
+Id; ///integer
+Name; //text
+CategoryGroupId //integer

@@ -1,0 +1,33 @@
+--------------
+SELECT CategoryGroups.Id, COUNT(*) AS total  FROM CategoryGroups LEFT JOIN Categories ON Categories.CategoryGroupId = CategoryGroups.Id
+GROUP BY CategoryGroups.Id
+ORDER BY total
+---------------
+SELECT CategoryId, COUNT(*) as total FROM Products
+GROUP BY CategoryId
+ORDER BY CategoryId
+-------------
+select count(*) from (select CategoryId, count(*) as total from Products
+group by CategoryId)
+
+--------------------------------
+SELECT Id, --integer
+       Guid, --text
+       Name, --text
+       Price, -- integer
+       Validation, -- text
+       CategoryId -- integer
+  FROM Products;
+
+---------------------------------------
+
+SELECT Id, ///integer
+       Name, //text
+       CategoryGroupId //integer
+  FROM Categories;
+
+-----------------------------------------
+SELECT Id, //integer
+       Name //text
+  FROM CategoryGroups;
+
